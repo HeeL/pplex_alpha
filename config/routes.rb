@@ -9,6 +9,8 @@ Pplex::Application.routes.draw do
     get '/users/auth/:provider/callback' => 'users/omniauth_callbacks#passthru'
   end
   
+  get 'languages/match_names' => 'languages#match_names', as: :match_languages
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
