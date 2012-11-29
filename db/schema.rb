@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20121120140539) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
-    t.string   "type",                   :default => "learner"
+    t.string   "type",                   :default => "Learner"
     t.integer  "min_price",              :default => 0
     t.integer  "max_price",              :default => 0
     t.boolean  "active",                 :default => true

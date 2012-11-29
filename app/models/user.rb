@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   default_scope where(active: true)
 
-  def self.find_for_facebook_oauth(auth, current_user)
+  def self.find_fb_user(auth)
     user = User.where(provider: auth.provider, uid: auth.uid).first
     unless user
       user = User.create(
@@ -21,20 +21,20 @@ class User < ActiveRecord::Base
         provider: auth.provider,
         uid: auth.uid,
         email: auth.info.email,
-        password: Devise.friendly_token[0,20]
+        password: Devise.friendly_token[0,10]
       )
     end
     user
   end
 
-  def self.find_for_google_oauth2(data, current_user)
+  def self.find_google_user(data)
     auth = data.info
     user = User.where(email: auth['email']).first
     unless user
       user = User.create(
         name: auth['name'],
         email: data['email'],
-        password: Devise.friendly_token[0,20]
+        password: Devise.friendly_token[0,10]
       )
     end
     user
