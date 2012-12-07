@@ -24,9 +24,25 @@ describe Language do
     let(:result) { subject.match_names('something') }
 
     it 'returns an empty array' do
-      result.empty?.should be_true
-      result.should be_kind_of(Array)
+      result.should eq([])
     end
+    
   end
+
+  context 'bad name provided' do
+
+    it 'returns an empty array for nil' do
+      subject.match_names(nil).should eq([])
+    end
+    
+    it 'returns an empty array for false' do
+      subject.match_names(false).should eq([])
+    end
+    
+    it 'returns an empty array for empty string' do
+      subject.match_names('').should eq([])
+    end
+
+  end  
 
 end

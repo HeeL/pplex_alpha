@@ -1,9 +1,9 @@
-$(document).ready(function() {
+$(document).ready(function(){
+  
   $('#lang').bind('keyup', function() {
-    $.get('/languages/match_names.json', {name: $(this).val()}, function(data){
-      $(data).each(function(i, lang){
-        console.log(lang.name);
-      });
+    $.get('/languages/match_names', {name: $(this).val()}, function(data){
+      $('#matched_names').html(data)
     });
   });
+
 });
