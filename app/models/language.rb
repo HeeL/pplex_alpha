@@ -7,8 +7,7 @@ class Language < ActiveRecord::Base
   
   
   def self.match_names(name)
-    return [] if name.to_s.empty?
-    self.where('name LIKE ?', "%#{name}%").all
+    self.where('name LIKE ?', "%#{name}%").all.map(&:name)
   end
   
 end

@@ -10,13 +10,13 @@ describe Language do
     end
 
     it "finds matching names" do
-      subject.match_names('Ru').should eql([@lang1, @lang2])
-      subject.match_names('Ruby').should eql([@lang1, @lang2])
-      subject.match_names('Ruby+').first.should eql(@lang2)
+      subject.match_names('Ru').should eql([@lang1.name, @lang2.name])
+      subject.match_names('Ruby').should eql([@lang1.name, @lang2.name])
+      subject.match_names('Ruby+').first.should eql(@lang2.name)
     end
 
     it 'ignores the case of letters' do
-      subject.match_names('RuBy++').first.should eql(@lang2)
+      subject.match_names('RuBy++').first.should eql(@lang2.name)
     end
   end
   
@@ -26,23 +26,6 @@ describe Language do
     it 'returns an empty array' do
       result.should eq([])
     end
-    
   end
-
-  context 'bad name provided' do
-
-    it 'returns an empty array for nil' do
-      subject.match_names(nil).should eq([])
-    end
-    
-    it 'returns an empty array for false' do
-      subject.match_names(false).should eq([])
-    end
-    
-    it 'returns an empty array for empty string' do
-      subject.match_names('').should eq([])
-    end
-
-  end  
 
 end

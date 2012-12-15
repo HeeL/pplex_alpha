@@ -1,9 +1,11 @@
 $(document).ready(function(){
   
-  $('#lang').bind('keyup', function() {
-    $.get('/languages/match_names', {name: $(this).val()}, function(data){
-      $('#matched_names').html(data)
-    });
+  $('#lang').autocomplete({
+    source: function( request, response ) {
+      $.get('/languages/match_names', {name: request.term}, function(data){
+        response(data);
+      });            
+    }
   });
 
 });
