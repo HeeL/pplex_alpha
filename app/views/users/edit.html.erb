@@ -1,0 +1,10 @@
+<%= form_tag(update_profile_path, remote: true, id: 'edit_form', method: 'put') %>
+
+<%= label_tag :name %> 
+<%= text_field_tag :name, current_user.name %> <br />
+<%= label_tag :min_price %>
+<%= text_field_tag :min_price, current_user.min_price %> <br />
+<%= label_tag :max_price %>
+<%= text_field_tag :max_price, current_user.max_price %> <br />
+
+<%= submit_tag %>

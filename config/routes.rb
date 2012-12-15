@@ -3,14 +3,17 @@ Pplex::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   devise_scope :user do
     get '/users/auth/:provider/callback' => 'users/omniauth_callbacks#passthru'
+
+    get 'profile/edit' => 'users#edit', as: :edit_profile
+    put 'profile/update' => 'users#update', as: :update_profile
   end
   
   get 'languages/match_names' => 'languages#match_names', as: :match_languages
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
