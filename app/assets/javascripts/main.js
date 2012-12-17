@@ -4,3 +4,12 @@ function show_message(text, title, type) {
 
   $.pnotify( {type: type, title: title, text: text} );
 }
+
+$(document).ready(function(){
+  $('#signup_link').bind('click', function(){
+    $('#signup_block').toggle('inline');
+  });
+});
+//#teacher_link'
+
+//$('.signup_methods').is(':visible')
