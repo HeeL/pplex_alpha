@@ -1,10 +1,47 @@
-<%= form_tag(update_profile_path, remote: true, id: 'edit_form', method: 'put') %>
+<div id="profile">
 
-<%= label_tag :name %> 
-<%= text_field_tag :name, current_user.name %> <br />
-<%= label_tag :min_price %>
-<%= text_field_tag :min_price, current_user.min_price %> <br />
-<%= label_tag :max_price %>
-<%= text_field_tag :max_price, current_user.max_price %> <br />
+  <%= form_tag(update_profile_path, remote: true, id: 'edit_form', method: 'put') %>
 
-<%= submit_tag %>
+  <%= label_tag :name %> 
+  <%= text_field_tag :name, current_user.name %> <br />
+
+  <div class="clear"></div>
+
+  <div class="actions">
+    <div class="left">
+      I want to:
+    </div>
+
+    <label class="checkbox left">
+      <%= check_box_tag :teach, 1, current_user.teach? %>&nbsp;Teach
+    </label>
+
+    <label class="checkbox left">
+      <%= check_box_tag :learn, 1, current_user.learn? %>&nbsp;Learn
+    </label>
+  </div>
+  <div class="clear"></div>
+
+  <div id="teacher_info">
+    <h3>Teacher Info:</h3>
+    <%= label_tag :teacher_min_price, 'Price Range (per hour)' %>
+    <%= text_field_tag :teacher_min_price, current_user.teacher.min_price, class: 'span1', maxlength: 2 %> &nbsp; &ndash; &nbsp;  
+    <%= text_field_tag :teacher_max_price, current_user.teacher.max_price, class: 'span1', maxlength: 2 %> <br />
+    <%= label_tag :teacher_langs, 'Languages you can teach:' %>
+    <%= text_field_tag :teacher_langs, current_user.teacher.languages, class: 'span4' %> <br />
+  </div>
+
+  <div id="learner_info">
+    <h3>Learner Info:</h3>
+    <%= label_tag :learner_min_price, 'Price Range (per hour)' %>
+    <%= text_field_tag :learner_min_price, current_user.learner.min_price, class: 'span1', maxlength: 2 %> &nbsp; &ndash; &nbsp;  
+    <%= text_field_tag :learner_max_price, current_user.learner.max_price, class: 'span1', maxlength: 2 %> <br />
+    <%= label_tag :learner_langs, 'Languages you want to learn:' %>
+    <%= text_field_tag :learner_langs, current_user.learner.languages, class: 'span4' %> <br />
+  </div>
+
+  <div class="clear"></div>
+
+  <%= submit_tag 'Save Changes', class: 'btn-large btn-primary submit' %>
+
+</div>

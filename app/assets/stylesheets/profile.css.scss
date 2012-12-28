@@ -1,0 +1,21 @@
+#profile {
+  .actions {
+    margin-top: 15px;
+  }
+  #teacher_info, #learner_info {
+    display: none;
+    float: left;
+  }
+  #learner_info {
+    margin-left: 50px;
+  }
+  .submit {
+    margin: 25px 0 0 10px;
+  }
+  .left {
+    float: left; 
+  }
+  #learn, #teach {
+    margin-left: 5px;
+  }
+}

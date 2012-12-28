@@ -16,16 +16,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def login_or_reg
     @user.persisted? ? login_user : reg_user
-    redirect_to edit_profile_path
   end
 
   def reg_user
     session["devise.#{@provider.downcase}_data"] = request.env["omniauth.auth"]
+    redirect_to edit_profile_path
   end
   
   def login_user
     flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: @provider
     sign_in @user, event: :authentication
+    redirect_to root_path
   end
 
 end

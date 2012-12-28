@@ -5,11 +5,23 @@ $(document).ready(function(){
   });
   $("#edit_form").bind('ajax:success', function(data, response, xhr) {
     if (response == 'false') {
-      show_message("Sorry, we've tried to save it and failed", 'Error', 'error');
+      show_message("Sorry, we've failed to save it", 'Error', 'error');
     }
     else {
       show_message('Success', 'Profile updated');
     }
   });
 
+  $('#teach').bind('change', function() {
+    show_hide($('#teacher_info'), $(this).attr('checked'))
+  });
+  $('#learn').bind('change', function() {
+    show_hide($('#learner_info'), $(this).attr('checked'))
+  });
+  $('#learn, #teach').change();
+  
+  function show_hide(el, show) {
+    show ? el.fadeIn() : el.fadeOut()
+  }
+  
 });

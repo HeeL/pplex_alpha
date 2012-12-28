@@ -1,3 +1,5 @@
-class Teacher < User
+class Teacher < ActiveRecord::Base
 
+  belongs_to :user
+  
 end

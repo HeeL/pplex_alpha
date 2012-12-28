@@ -6,11 +6,15 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, 
-                  :uid, :name, :min_price, :max_price, :active
+                  :uid, :name, :active
 
   has_and_belongs_to_many :languages
+  has_one :teacher, :dependent => :destroy
+  has_one :learner, :dependent => :destroy
 
   default_scope where(active: true)
+  
+  before_save :create_teacher_learner
 
   def self.find_fb_user(auth)
     user = User.where(provider: auth.provider, uid: auth.uid).first
@@ -37,6 +41,12 @@ class User < ActiveRecord::Base
       )
     end
     user
+  end
+  
+  private
+  def create_teacher_learner
+    self.teacher = Teacher.create
+    self.learner = Learner.create
   end
   
 end
