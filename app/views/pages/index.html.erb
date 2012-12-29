@@ -1,16 +1,16 @@
 Home page
 <br />
 <% if user_signed_in? %>
-<%= link_to "Sign out", destroy_user_session_path, method: 'delete' %>
+    <%= link_to current_user.name, edit_profile_path %> | 
+  <%= link_to "Sign out", sign_out_user_path %>
 <% else %>
-
-I want to <span id="signup_link" class="js-link">Teach / Learn</span><br />
-<div class="signup-methods" id="signup_block">
-  You can sign in with one of your <%= link_to 'Facebook', user_omniauth_authorize_path(:facebook) %> or 
-  <%= link_to 'Google', user_omniauth_authorize_path(:google_oauth2) %> accounts
-  <%= link_to(image_tag('/assets/fb_logo.jpg'), user_omniauth_authorize_path(:facebook)) %> &nbsp;
-  <%= link_to(image_tag('/assets/g_logo.png'), user_omniauth_authorize_path(:google_oauth2)) %>
-</div>
+  I want to <span id="signup_link" class="js-link">Teach / Learn</span><br />
+  <div class="signup-methods" id="signup_block">
+    You can sign in with one of your <%= link_to 'Facebook', user_omniauth_authorize_path(:facebook) %> or 
+    <%= link_to 'Google', user_omniauth_authorize_path(:google_oauth2) %> accounts
+    <%= link_to(image_tag('/assets/fb_logo.jpg'), user_omniauth_authorize_path(:facebook)) %> &nbsp;
+    <%= link_to(image_tag('/assets/g_logo.png'), user_omniauth_authorize_path(:google_oauth2)) %>
+  </div>
 <% end %>
 
 <br />

@@ -5,11 +5,12 @@ function show_message(text, title, type) {
   $.pnotify( {type: type, title: title, text: text} );
 }
 
+function show_hide(el, show) {
+  show ? el.fadeIn() : el.fadeOut()
+}
+
 $(document).ready(function(){
   $('#signup_link').bind('click', function(){
     $('#signup_block').toggle('inline');
   });
 });
-//#teacher_link'
-
-//$('.signup_methods').is(':visible')

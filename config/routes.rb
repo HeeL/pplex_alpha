@@ -2,17 +2,21 @@ Pplex::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :users, skip: :sessions, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  match 'users/sign_in' => redirect('/')
+  match 'users/sign_out' => 'users#sign_out_user', as: :sign_out_user
 
   devise_scope :user do
     get '/users/auth/:provider/callback' => 'users/omniauth_callbacks#passthru'
 
-    get 'profile/edit' => 'users#edit', as: :edit_profile
-    put 'profile/update' => 'users#update', as: :update_profile
+    get  'profile/edit' => 'users#edit', as: :edit_profile
+    match 'profile/update' => 'users#update', as: :update_profile
   end
-  
+
   get 'languages/match_names' => 'languages#match_names', as: :match_languages
+
+  root to: 'pages#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -60,10 +64,6 @@ Pplex::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'pages#index'
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,13 +1,18 @@
 #profile {
   .actions {
     margin-top: 15px;
+    div {
+      float: left;
+    }
+    label {
+      float: left;
+      margin-left: 22px;
+    }
   }
   #teacher_info, #learner_info {
     display: none;
     float: left;
-  }
-  #learner_info {
-    margin-left: 50px;
+    width: 280px;
   }
   .submit {
     margin: 25px 0 0 10px;

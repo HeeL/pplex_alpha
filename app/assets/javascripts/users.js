@@ -4,24 +4,39 @@ $(document).ready(function(){
     show_message('Status: ' + status.status + '\n' + status.statusText, 'Error', 'error');
   });
   $("#edit_form").bind('ajax:success', function(data, response, xhr) {
-    if (response == 'false') {
-      show_message("Sorry, we've failed to save it", 'Error', 'error');
+    if (response.status == 'error') {
+      show_message(response.text, 'Error', 'error');
     }
     else {
-      show_message('Success', 'Profile updated');
+      show_message('Profile updated', 'Success');
     }
   });
 
-  $('#teach').bind('change', function() {
+  $('#user_teach').bind('change', function() {
     show_hide($('#teacher_info'), $(this).attr('checked'))
   });
-  $('#learn').bind('change', function() {
+  $('#user_learn').bind('change', function() {
     show_hide($('#learner_info'), $(this).attr('checked'))
   });
-  $('#learn, #teach').change();
+  $('#user_teach, #user_learn').change();
   
-  function show_hide(el, show) {
-    show ? el.fadeIn() : el.fadeOut()
-  }
+  $('#teacher_langs, #learner_langs').tagit({
+    allowSpaces: true,
+    autocomplete: {
+      source: function( request, response ) {
+        $.get('/languages/match_names', {name: request.term}, function(data){
+          response(data);
+        });
+      }
+    },
+    afterTagAdded: function(event, input) {
+      lang = input.tag.find('span').html();
+      $.get('/languages/match_names', {name: lang}, function(data){
+        if(data.length == 0) {
+          $(event.target).tagit('removeTagByLabel', lang);
+        }
+      });
+    }
+  });
   
 });

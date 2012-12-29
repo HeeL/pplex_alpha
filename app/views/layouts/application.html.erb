@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>Pplex</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css", media: "all" %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= js_msg([notice, alert])%>
   <div class="container-fluid">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= yield %>
   </div>
 </body>

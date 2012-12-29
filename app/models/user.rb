@@ -1,31 +1,33 @@
 class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+  devise :database_authenticatable, :validatable, :omniauthable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, 
-                  :uid, :name, :active
+  attr_accessible :email, :password, :name, :teach, :learn,
+                  :learner, :teacher, :teacher_attributes, :learner_attributes
 
-  has_and_belongs_to_many :languages
   has_one :teacher, :dependent => :destroy
   has_one :learner, :dependent => :destroy
 
+  accepts_nested_attributes_for :teacher, :learner
+
   default_scope where(active: true)
-  
-  before_save :create_teacher_learner
+
+  before_create :create_teacher_learner
+
+  validates :name, presence: true, length: {in: 3..30}
 
   def self.find_fb_user(auth)
     user = User.where(provider: auth.provider, uid: auth.uid).first
     unless user
       user = User.create(
         name: auth.extra.raw_info.name,
-        provider: auth.provider,
-        uid: auth.uid,
         email: auth.info.email,
         password: Devise.friendly_token[0,10]
       )
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.save
     end
     user
   end
