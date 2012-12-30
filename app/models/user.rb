@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :validatable, :omniauthable
+  
+  devise :database_authenticatable, :validatable, :omniauthable, :rememberable, :trackable
 
   attr_accessible :email, :password, :name, :teach, :learn,
                   :learner, :teacher, :teacher_attributes, :learner_attributes
@@ -45,6 +44,10 @@ class User < ActiveRecord::Base
     user
   end
   
+  def remember_me
+    true  
+  end
+
   private
   def create_teacher_learner
     self.teacher = Teacher.create
