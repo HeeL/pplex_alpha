@@ -13,10 +13,14 @@ $(document).ready(function(){
   });
 
   $('#user_teach').bind('change', function() {
-    show_hide($('#teacher_info'), $(this).attr('checked'))
+    active = $(this).attr('checked');
+    $('#teacher_info input').attr('disabled', !active);
+    show_hide($('#teacher_info'), active);
   });
   $('#user_learn').bind('change', function() {
-    show_hide($('#learner_info'), $(this).attr('checked'))
+    active = $(this).attr('checked');
+    $('#learner_info input').attr('disabled', !active);
+    show_hide($('#learner_info'), active)
   });
   $('#user_teach, #user_learn').change();
   
@@ -31,7 +35,7 @@ $(document).ready(function(){
     },
     afterTagAdded: function(event, input) {
       lang = input.tag.find('span').html();
-      $.get('/languages/match_names', {name: lang}, function(data){
+      $.get('/languages/match_names', {name: lang, exact: 1}, function(data){
         if(data.length == 0) {
           $(event.target).tagit('removeTagByLabel', lang);
         }

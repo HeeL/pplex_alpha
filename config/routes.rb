@@ -11,7 +11,7 @@ Pplex::Application.routes.draw do
     get '/users/auth/:provider/callback' => 'users/omniauth_callbacks#passthru'
 
     get  'profile/edit' => 'users#edit', as: :edit_profile
-    match 'profile/update' => 'users#update', as: :update_profile
+    put 'profile/update' => 'users#update', as: :update_profile
   end
 
   get 'languages/match_names' => 'languages#match_names', as: :match_languages

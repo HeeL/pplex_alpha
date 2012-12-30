@@ -9,6 +9,12 @@ describe Language do
       @lang2 = FactoryGirl.create(:language, name: 'Ruby++')
     end
 
+    context 'exact match on' do
+      it "finds matching names" do
+        subject.match_names('Ruby', true).should eql([@lang1.name])
+      end
+    end
+
     it "finds matching names" do
       subject.match_names('Ru').should eql([@lang1.name, @lang2.name])
       subject.match_names('Ruby').should eql([@lang1.name, @lang2.name])

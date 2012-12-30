@@ -3,6 +3,15 @@ require 'spec_helper'
 describe User do
   subject { User }
 
+  context 'create' do
+    it "creates teacher and learner for created user" do
+      user = FactoryGirl.create(:user)
+      user.learner.should be_kind_of(Learner)
+      user.teacher.should be_kind_of(Teacher)
+    end
+
+  end
+
   context 'facebook' do
     context "user exists" do
       it "find a user" do

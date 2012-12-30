@@ -6,8 +6,9 @@ class Language < ActiveRecord::Base
   has_and_belongs_to_many :teachers
   has_and_belongs_to_many :learners
   
-  def self.match_names(name)
-    self.where('name LIKE ?', "%#{name}%").all.map(&:name)
+  def self.match_names(name, exact = false)
+    name = "%#{name}%" unless exact
+    self.where('name LIKE ?', name).all.map(&:name)
   end
   
 end

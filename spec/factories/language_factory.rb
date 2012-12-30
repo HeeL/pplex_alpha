@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :language do |language|
+  factory :language do
     sequence :name do |n|
       "prog lang #{n}"
     end
