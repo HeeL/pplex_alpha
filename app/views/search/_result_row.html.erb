@@ -1,0 +1,6 @@
+<%person = user.send(@who)%>
+<div>
+  <b><%= user.name %></b><br />
+  Price:  $<%= person.min_price %> - $<%= person.max_price %> <br />
+  Technologies: <%= person.languages.map{|lang| lang.name}.join(', ')%>
+</div>

@@ -4,7 +4,7 @@
     <%= teacher.label :min_price, 'Price Range ($ per hour)' %>
     <%= teacher.text_field :min_price, class: 'span1', maxlength: 2 %> &nbsp; &ndash; &nbsp;  
     <%= teacher.text_field :max_price, class: 'span1', maxlength: 2 %> <br />
-    <%= label_tag :teacher_langs, 'Languages:' %>
+    <%= label_tag :teacher_langs, 'Languages, Frameworks, Tools:' %>
     <%= text_field_tag :teacher_langs, @langs[:teacher], class: 'span3' %> <br />
   <% end %>
 </div>

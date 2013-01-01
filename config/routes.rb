@@ -9,6 +9,9 @@ Pplex::Application.routes.draw do
   match 'users/register' => 'users#register', as: :register
   match 'users/login' => 'users#login', as: :login
 
+  match '/search' => 'search#index', as: :search
+  match '/search/get_count' => 'search#get_count'
+
   devise_scope :user do
     get '/users/auth/:provider/callback' => 'users/omniauth_callbacks#passthru'
 

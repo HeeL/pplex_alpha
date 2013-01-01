@@ -7,9 +7,6 @@
   <%= render partial: 'shared/sign_up_in', locals: {action: 'sign_in', path: login_path, label: 'Login'} %>
 <% end %>
 
-<br />
-<br />
-<h2>Search</h2>
+<%= render 'shared/search_form' %>
 
-Programming Language: <input type="text" name="lang" id="lang" />
-<div id="matched_names"></div>
+<div id="search_results"></div>

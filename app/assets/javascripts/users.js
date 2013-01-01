@@ -23,9 +23,10 @@ $(document).ready(function(){
       }
     },
     afterTagAdded: function(event, input) {
-      lang = input.tag.find('span').html();
+      lang = input.tag.find('span.tagit-label').text();
       $.get('/languages/match_names', {name: lang, exact: 1}, function(data){
         if(data.length == 0) {
+          show_message("We don't have \"" + lang + "\" in our list", '', 'error')
           $(event.target).tagit('removeTagByLabel', lang);
         }
       });
