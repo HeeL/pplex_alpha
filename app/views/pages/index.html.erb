@@ -1,20 +1,15 @@
-Home page
-<br />
 <% if user_signed_in? %>
     <%= link_to current_user.name, edit_profile_path %> | 
-  <%= link_to "Sign out", sign_out_user_path %>
+  <%= link_to "Sign out", logout_path %>
 <% else %>
-  I want to <span id="signup_link" class="js-link">Teach / Learn</span><br />
-  <div class="signup-methods" id="signup_block">
-    You can sign in with one of your <%= link_to 'Facebook', user_omniauth_authorize_path(:facebook) %> or 
-    <%= link_to 'Google', user_omniauth_authorize_path(:google_oauth2) %> accounts
-    <%= link_to(image_tag('/assets/fb_logo.jpg'), user_omniauth_authorize_path(:facebook)) %> &nbsp;
-    <%= link_to(image_tag('/assets/g_logo.png'), user_omniauth_authorize_path(:google_oauth2)) %>
-  </div>
+  You need to <span id="sign_up_link" class="js-link">create an account</span> <b>or</b> <span id="sign_in_link" class="js-link">sign in</span> to be able to Teach / Learn<br />
+  <%= render partial: 'shared/sign_up_in', locals: {action: 'sign_up', path: register_path, label: 'Register'} %>
+  <%= render partial: 'shared/sign_up_in', locals: {action: 'sign_in', path: login_path, label: 'Login'} %>
 <% end %>
 
 <br />
 <br />
+<h2>Search</h2>
 
 Programming Language: <input type="text" name="lang" id="lang" />
 <div id="matched_names"></div>

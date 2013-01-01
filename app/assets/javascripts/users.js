@@ -1,16 +1,5 @@
 $(document).ready(function(){
-  
-  $("#edit_form").bind('ajax:error', function(data, status, xhr) {
-    show_message('Status: ' + status.status + '\n' + status.statusText, 'Error', 'error');
-  });
-  $("#edit_form").bind('ajax:success', function(data, response, xhr) {
-    if (response.status == 'error') {
-      show_message(response.text, 'Error', 'error');
-    }
-    else {
-      show_message('Profile updated', 'Success');
-    }
-  });
+  track_remote_messages($('#edit_form, #sign_up_form, #sign_in_form'));
 
   $('#user_teach').bind('change', function() {
     active = $(this).attr('checked');
@@ -40,6 +29,12 @@ $(document).ready(function(){
           $(event.target).tagit('removeTagByLabel', lang);
         }
       });
+    }
+  });
+  
+  $('#sign_up_form, #sign_in_form').bind('ajax:success', function(data, response, xhr) {
+    if (response.status == 'success') {
+      window.location.href = '/profile/edit'
     }
   });
   
