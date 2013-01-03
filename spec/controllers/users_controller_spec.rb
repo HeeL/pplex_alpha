@@ -51,6 +51,20 @@ describe UsersController do
       get :register, email: 'test@test.com', password: 's3cr3Tzz'
       User.where(email: 'test@test.com').count.should == 1
     end
+
+    it "limit registrations from 1 ip" do
+      User.destroy_all
+      25.times do |n|
+        get :register, email: "test#{n}@test.com", password: 's3cr3Tzz'
+      end
+      User.count.should == 20
+      user = User.last
+      user.created_at = Time.now - 30.hours
+      user.save
+      get :register, email: "test25@test.com", password: 's3cr3Tzz'
+      User.count.should == 21
+    end
+
   end
 
   describe '#login' do

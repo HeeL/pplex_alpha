@@ -12,8 +12,6 @@ gem 'omniauth-google-oauth2'
 
 gem 'anjlab-bootstrap-rails', '>= 2.2', require: 'bootstrap-rails'
 
-gem "paperclip", "~> 3.0"
-
 gem 'activeadmin'
 gem "meta_search", '>= 1.1.0.pre'
 

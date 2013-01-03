@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update, :logout]
   before_filter :get_langs, only: :edit
   before_filter :set_langs, only: :update
+  before_filter :check_reg_count, only: :register
 
   def edit
   end
@@ -52,6 +53,14 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def check_reg_count
+    reg_count = User.where('created_at >= ? AND  last_sign_in_ip = ?', Time.now - 24.hours, request.remote_ip).count
+    if reg_count >= 20
+      render json: set_error('Too many registrations from your IP')
+      return false
+    end
+  end
 
   def get_langs
     @langs = {}
