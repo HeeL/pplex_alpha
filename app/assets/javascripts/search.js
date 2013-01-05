@@ -1,5 +1,25 @@
 $(document).ready(function(){
 
+  $('#langs').tagit({
+    allowSpaces: true,
+    autocomplete: {
+      source: function( request, response ) {
+        $.get('/languages/match_names', {name: request.term}, function(data){
+          response(data);
+        });
+      }
+    },
+    afterTagAdded: function(event, input) {
+      lang = input.tag.find('span.tagit-label').text();
+      $.get('/languages/match_names', {name: lang, exact: 1}, function(data){
+        if(data.length == 0) {
+          show_message("We don't have \"" + lang + "\" in our list", '', 'error')
+          $(event.target).tagit('removeTagByLabel', lang);
+        }
+      });
+    }
+  });
+
   $('#who_teacher, #who_learner').bind('change', function(){
     current_label = $('#submit_search').val()
     if($('input[name="who"]:checked').val() == 'teacher') {
@@ -11,27 +31,18 @@ $(document).ready(function(){
     $('#submit_search').val(new_label)
   });
 
-  $('#submit_search').bind('click', function() {
+  function clean_results() {
     $('#search_results').html('');
     $('#show_more').hide();
-    $('#offset').val(0);
-  });
+    $('#offset').val(0);  
+  }
 
+  $('#submit_search').bind('click', function() {
+    clean_results();
+  });
 
   $('#search_form input').bind('change keyup', function() {
-    $('#search_results').html('');
-    $('#show_more').hide();
-    $('#offset').val(0);
-  });
-
-  $('#lang').autocomplete({
-    source: function( request, response ) {
-      $.get('/languages/match_names', {name: request.term}, function(data){
-        response(data);
-      });            
-    },
-    change: update_result_count,
-    select: update_result_count
+    clean_results();
   });
 
   $('#search_form input').bind('change', function() {

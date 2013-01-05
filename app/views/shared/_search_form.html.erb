@@ -3,8 +3,8 @@
 
   <%= form_tag(search_path, remote: true, id: 'search_form') do %>
     <div class="search-fields">
-      <%= label_tag :lang, 'Language, Library, Tool:' %>
-      <%= text_field_tag :lang%> <br />
+      <%= label_tag :langs, 'Language, Library, Tool:' %>
+      <%= text_field_tag :langs %> <br />
       <div class="radio-btn">
         <%= radio_button_tag :who, 'teacher', true %> Teacher <%= radio_button_tag :who, 'learner' %> Learner
       </div>

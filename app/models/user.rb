@@ -50,8 +50,8 @@ class User < ActiveRecord::Base
 
   private
   def create_teacher_learner
-    self.teacher = Teacher.create
-    self.learner = Learner.create
+    self.teacher = Teacher.create unless self.teacher
+    self.learner = Learner.create unless self.learner
   end
   
 end
