@@ -17,6 +17,8 @@ Pplex::Application.routes.draw do
 
     get 'profile/edit' => 'users#edit', as: :edit_profile
     put 'profile/update' => 'users#update', as: :update_profile
+
+    post '/send_contacts' => 'contacts#send_contacts', as: :send_contacts
   end
 
   get 'languages/match_names' => 'languages#match_names', as: :match_languages

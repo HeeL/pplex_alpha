@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   has_one :teacher, :dependent => :destroy
   has_one :learner, :dependent => :destroy
 
+  has_many :sent_contacts, class_name: 'ContactLog', foreign_key: :user_sent
+  has_many :received_contacts, class_name: 'ContactLog', foreign_key: :user_received
+
+
   accepts_nested_attributes_for :teacher, :learner
 
   default_scope where(active: true)

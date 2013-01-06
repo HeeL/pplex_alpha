@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SearchHelper do
   helper SearchHelper
 
-  context "format prices" do
+  describe "#prices" do
     before :each do
       @person = FactoryGirl.create(:learner)
     end
@@ -25,7 +25,7 @@ describe SearchHelper do
     end
   end
 
-  context "format langs" do
+  describe "#langs" do
     before :each do
       @person = FactoryGirl.create(:learner)
     end

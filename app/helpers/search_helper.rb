@@ -12,4 +12,9 @@ module SearchHelper
     person.languages.empty? ? '&ndash;'.html_safe : person.languages.map(&:name).join(', ')
   end
 
+  def contacts_count(user, who)
+    return 0 unless current_user
+    ContactLog.where(user_sent: current_user.id, user_received: user.id, received_as: who).count
+  end
+
 end
