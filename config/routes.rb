@@ -12,6 +12,8 @@ Pplex::Application.routes.draw do
   match '/search' => 'search#index', as: :search
   match '/search/get_count' => 'search#get_count'
 
+  post '/send_feedback' => 'feedbacks#send_feedback', as: :send_feedback
+
   devise_scope :user do
     get '/users/auth/:provider/callback' => 'users/omniauth_callbacks#passthru'
 
