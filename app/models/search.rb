@@ -2,7 +2,7 @@ class Search
 
   attr_reader :who
 
-  PER_PAGE = 2
+  PER_PAGE = 25
 
   def initialize(options, current_user)
     @options = options
