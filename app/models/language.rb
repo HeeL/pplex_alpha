@@ -7,7 +7,7 @@ class Language < ActiveRecord::Base
   
   def self.match_names(name, exact = false)
     name = "%#{name}%" unless exact
-    self.where('name LIKE ?', name).all.map(&:name)
+    self.where('name ILIKE ?', name).all.map(&:name)
   end
   
 end
