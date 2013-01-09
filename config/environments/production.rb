@@ -21,16 +21,6 @@ Pplex::Application.configure do
     :authentication  => :plain
   }
 
-
-  config.action_mailer.smtp_settings = {
-    :address  => ENV['MAIL_SERVER'],
-    :port  => 25,
-    :user_name  => ENV['EMAIL_USER'],
-    :password  => ENV['EMAIL_PASS'],
-    :authentication  => :plain
-  }
-
-
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
