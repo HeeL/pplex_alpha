@@ -20,7 +20,8 @@ $(document).ready(function(){
         $.get('/languages/match_names', {name: request.term}, function(data){
           response(data);
         });
-      }
+      },
+      minLength: 2
     },
     afterTagAdded: function(event, input) {
       lang = input.tag.find('span.tagit-label').text();
