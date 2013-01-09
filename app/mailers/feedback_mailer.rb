@@ -1,5 +1,5 @@
 class FeedbackMailer < ActionMailer::Base
-  default from: "no-reply@pplex"
+  default from: ENV['EMAIL_ADDRESS']
 
   def send_feedback(info)
     @info = info

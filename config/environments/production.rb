@@ -11,7 +11,15 @@ Pplex::Application.configure do
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
 
-  config.action_mailer.default_url_options = { :host => 'pplex.net' }
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    address: ENV['EMAIL_SERVER'],
+    port: 25,
+    user_name: ENV['EMAIL_USER'],
+    password: ENV['EMAIL_PASS'],
+    authentication: :plain
+  }
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
