@@ -24,6 +24,15 @@ function show_hide(el, show) {
 }
 
 $(document).ready(function(){
+  $('form[data-remote=true]').bind('ajax:send', function(){
+    $(this).find('.loading').show('slow');
+    $(this).find('input[type="submit"]').attr('disabled', true)
+  });
+  $('form[data-remote=true]').bind('ajax:complete', function(){
+    $(this).find('.loading').hide();
+    $(this).find('input[type="submit"]').attr('disabled', false)
+  });
+
   $('#sign_up_link').bind('click', function(){
     $('#sign_in_block').hide();
     $('#sign_up_block').toggle('inline');

@@ -25,6 +25,9 @@
   
   <div class="clear"></div>
 
-  <%= submit_tag 'Save Changes', class: 'btn-large btn-primary submit' %>
+  <div class="submit">
+    <%= submit_tag 'Save Changes', class: 'btn-large btn-primary' %>
+    <%= image_tag 'ajax-loader.gif', class: 'loading' %>
+  </div>
 <% end %>
 </div>
