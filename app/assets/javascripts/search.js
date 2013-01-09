@@ -65,13 +65,18 @@ $(document).ready(function(){
   $('#who_teacher').change();
 
   $('#search_form').bind('ajax:success', function(data, response, xhr) {
-    $('#search_results').append(response);
-    if ($('#result_count').val() > $('.person').length) {
+    if(response != '') {
+      $('#search_results').append(response);
+    }
+    else {
+      update_result_count();
+    }
+    if ($('#result_count').val() > $('.person').length && response != '') {
       $('#offset').val($('.person').length)
       $('#show_more').show();
     }
     else {
-      $('#show_more').hide(); 
+      $('#show_more').hide();
     }
   });
 
