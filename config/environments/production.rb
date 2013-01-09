@@ -20,7 +20,7 @@ Pplex::Application.configure do
     :port  => 25,
     :user_name  => ENV['EMAIL_USER'],
     :password  => ENV['EMAIL_PASS'],
-    :authentication  => :login
+    :authentication  => ENV['EMAIL_AUTH'].to_sym
   }
 
   # Compress JavaScripts and CSS
