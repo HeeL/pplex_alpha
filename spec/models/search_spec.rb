@@ -91,10 +91,11 @@ describe Search do
     context "lang condition" do
       before :each do
         @teacher1 = FactoryGirl.create(:user, teach: true)
-        @teacher1.teacher.languages = [FactoryGirl.create(:language, name: 'Ruby'), FactoryGirl.create(:language, name: 'Python')]
+        ruby_lang = FactoryGirl.create(:language, name: 'Ruby')
+        @teacher1.teacher.languages = [ruby_lang, FactoryGirl.create(:language, name: 'Python')]
         @teacher1.save
         @teacher2 = FactoryGirl.create(:user, teach: true)
-        @teacher2.teacher.languages = [FactoryGirl.create(:language, name: 'C++'), FactoryGirl.create(:language, name: 'Ruby')]
+        @teacher2.teacher.languages = [FactoryGirl.create(:language, name: 'C++'), ruby_lang]
         @teacher2.save
       end
 
