@@ -8,6 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%=render partial: 'shared/ga.html.erb'%>
   <%= js_msg([notice, alert])%>
   <div class="container-fluid">
     <%= yield %>
