@@ -1,5 +1,5 @@
 class ContactMailer < ActionMailer::Base
-  default from: ENV['EMAIL_ADDRESS']
+  default from: 'no-reply@pplex.net'
  
   def send_learner_contacts(info)
     @info = info
