@@ -10,6 +10,8 @@
 <body>
   <%=render 'shared/ga'%>
   <%= js_msg([notice, alert])%>
+  <%= js_msg([flash[:error]], 'error')%>
+
   <div class="container-fluid">
     <%= yield %>
   </div>
