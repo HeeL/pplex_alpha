@@ -22,8 +22,8 @@ class User < ActiveRecord::Base
 
   def self.find_fb_user(auth)
     user = User.where(provider: auth.provider, uid: auth.uid).first
-    unless user
-      user = User.create(
+    if !user
+      user = User.new(
         name: auth.extra.raw_info.name,
         email: auth.info.email,
         password: Devise.friendly_token[0,10]
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   def self.find_google_user(data)
     auth = data.info
     user = User.where(email: auth['email']).first
-    unless user
+    if !user
       user = User.create(
         name: auth['name'],
         email: auth['email'],
