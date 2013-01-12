@@ -5,4 +5,8 @@ module ApplicationHelper
     javascript_tag("$(document).ready(function(){ #{js.join} });") unless js.empty?
   end
 
+  def on_root_page?
+    request.fullpath == '/'
+  end
+
 end

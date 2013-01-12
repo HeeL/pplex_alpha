@@ -16,6 +16,11 @@
   <div class="container-fluid">
     <%= yield %>
   </div>
-  <%= render partial: 'shared/feedback_form' %>
+
+  <% if on_root_page? %>
+    <%= render partial: 'shared/feedback_form' %>
+    <%= render partial: 'shared/soc_btns' %>
+  <% end %>
+  
 </body>
 </html>

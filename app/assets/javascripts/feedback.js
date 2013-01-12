@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   $('#feedback_link').bind('click', function(){
 
-    $('#feedback_form').css('left', $('#feedback_link').offset().left - 190 + 'px');
+    $('#feedback_form').css('right', '80px');
     $('#feedback_form').css('top', $('#feedback_link').offset().top - 280 + 'px');
     $('#feedback_form').toggle('slide');
   });
