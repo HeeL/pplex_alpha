@@ -1,0 +1,6 @@
+<h3>Current Balance: <%=current_user.balance%></h3>
+<%= form_tag robokassa_path do %>
+  <%= label_tag :amount, 'Amount (USD)' %>
+  <%= text_field_tag :amount, '5', class: 'span1', maxlength: 4 %> <br />
+  <%= submit_tag 'Increase balance', class: 'btn-large btn-primary' %>
+<% end %>

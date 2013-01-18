@@ -5,12 +5,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :name, :teach, :learn,
                   :learner, :teacher, :teacher_attributes, :learner_attributes
 
-  has_one :teacher, :dependent => :destroy
-  has_one :learner, :dependent => :destroy
-
+  has_one :teacher, dependent: :destroy
+  has_one :learner, dependent: :destroy
   has_many :sent_contacts, class_name: 'ContactLog', foreign_key: :user_sent
   has_many :received_contacts, class_name: 'ContactLog', foreign_key: :user_received
-
+  has_many :balance_histories, dependent: :destroy
 
   accepts_nested_attributes_for :teacher, :learner
 
@@ -50,6 +49,12 @@ class User < ActiveRecord::Base
   
   def remember_me
     true  
+  end
+
+  def add_money(amount)
+    BalanceHistory.create(amount: amount, user: self, action: 'plus')
+    self.balance += amount.to_i
+    self.save!
   end
 
   private
