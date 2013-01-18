@@ -56,6 +56,12 @@ class User < ActiveRecord::Base
     self.balance += amount.to_i
     self.save!
   end
+  
+  def sub_money(amount)
+    BalanceHistory.create(amount: amount, user: self, action: 'minus')
+    self.balance -= amount.to_i
+    self.save!
+  end
 
   private
   def create_teacher_learner

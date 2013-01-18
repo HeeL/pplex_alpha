@@ -1,13 +1,13 @@
 class BalanceController < ApplicationController
   
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: :process_payment
 
   def index
     check_status
   end
 
   def process_payment
-    amount = params[:amount]
+    amount = params[:outsum]
     signature = md5("#{amount}:#{params[:invid]}:#{ENV['ROBO_PASS2']}").upcase
     current_user.add_money(amount) if signature == params[:signature]
     render nothing: true

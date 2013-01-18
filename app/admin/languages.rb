@@ -6,7 +6,7 @@ ActiveAdmin.register Language do
     default_actions
   end
   
-  form multipart: true do |f|
+  form do |f|
     f.inputs do
       f.input :name
     end
@@ -14,7 +14,7 @@ ActiveAdmin.register Language do
     f.buttons
   end
   
-  show do |lang|
+  show do
     attributes_table do
       row :name
     end
