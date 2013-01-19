@@ -14,7 +14,7 @@ Pplex::Application.routes.draw do
 
     get 'profile/edit' => 'users#edit', as: :edit_profile
     put 'profile/update' => 'users#update', as: :update_profile
-    get 'profile/balance' => 'balance#index', as: :profile_balance
+    match 'profile/balance' => 'balance#index', as: :profile_balance, via: [:get, :post]
     post 'profile/robokassa' => 'balance#robokassa', as: :robokassa
 
     post '/send_contacts' => 'contacts#send_contacts', as: :send_contacts
