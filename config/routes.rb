@@ -14,13 +14,13 @@ Pplex::Application.routes.draw do
 
     get 'profile/edit' => 'users#edit', as: :edit_profile
     put 'profile/update' => 'users#update', as: :update_profile
-    match 'profile/balance' => 'balance#index', as: :profile_balance, via: [:get, :post]
+    match 'profile/balance(/:status)' => 'balance#index', as: :profile_balance, via: [:get, :post]
     post 'profile/robokassa' => 'balance#robokassa', as: :robokassa
 
     post '/send_contacts' => 'contacts#send_contacts', as: :send_contacts
   end
 
-  post 'process_payment' => 'balance#process_payment'
+  match 'process_payment' => 'balance#process_payment'
 
   match '/search' => 'search#index', as: :search
   match '/search/get_count' => 'search#get_count'
