@@ -7,10 +7,10 @@ class BalanceController < ApplicationController
   end
 
   def process_payment
-    amount = params[:outsum]
+    amount = params[:OutSum]
     status = 'fail'
-    signature = md5("#{amount}:#{params[:invid]}:#{ENV['ROBO_PASS2']}").upcase
-    if signature == params[:signature]
+    signature = md5("#{amount}:#{params[:InvId]}:#{ENV['ROBO_PASS2']}").upcase
+    if signature == params[:SignatureValue]
       status = 'success'
       current_user.add_money(amount)
     end
