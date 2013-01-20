@@ -8,9 +8,13 @@ class BalanceController < ApplicationController
 
   def process_payment
     amount = params[:outsum]
+    status = 'fail'
     signature = md5("#{amount}:#{params[:invid]}:#{ENV['ROBO_PASS2']}").upcase
-    current_user.add_money(amount) if signature == params[:signature]
-    render nothing: true
+    if signature == params[:signature]
+      status = 'success'
+      current_user.add_money(amount)
+    end
+    render text: status
   end
 
   def robokassa
