@@ -12,13 +12,13 @@ class BalanceController < ApplicationController
     signature = md5("#{amount}:#{params[:InvId]}:#{ENV['ROBO_PASS2']}:shp_user=#{params[:shp_user]}").upcase
     if signature == params[:SignatureValue]
       status = 'success'
-      User.find(params[:shp_user]).add_money(amount)
+      User.find(params[:shp_user]).add_money(amount / 30)
     end
     render text: status
   end
 
   def robokassa
-    amount = params[:amount].to_i
+    amount = params[:amount].to_i * 30
     signature =  md5("#{ENV['ROBO_LOGIN']}:#{amount}:0:#{ENV['ROBO_PASS1']}:shp_user=#{current_user.id}")
     request = {
       outSum: amount,

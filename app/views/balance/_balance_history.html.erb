@@ -1,0 +1,16 @@
+<h3 class="balance_history">Balance History:</h3>
+<table class="balance_history">
+  <% current_user.balance_histories.reverse.each_with_index do |trans, i| %>
+    <tr  class="<%= i.odd? ? 'odd' : 'even' %>">
+      <td>
+        <%= image_tag "/assets/balance/#{trans[:action]}.png", alt: trans[:action], title: trans[:action]%>
+      </td>
+      <td>
+        $ <%= trans[:amount]%>
+      </td>
+      <td>
+        <%=trans[:created_at].strftime('%d.%m.%Y')%>
+      </td>
+    </tr>
+  <% end %>
+</table>
